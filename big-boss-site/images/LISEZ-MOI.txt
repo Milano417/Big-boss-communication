@@ -1,0 +1,39 @@
+PHOTOS PRODUITS (images/produits/, JPG) — manquantes (33) :
+  tecno-camon-50-pro.jpg -> Tecno Camon 50 Pro (256 Go)
+  tecno-spark-50.jpg -> Tecno Spark 50
+  infinix-hot-40-pro.jpg -> Infinix Hot 40 Pro (256 Go)
+  iphone-xr-64gb.jpg -> Apple iPhone XR 64 Go (reconditionné A+)
+  samsung-galaxy-a55.jpg -> Samsung Galaxy A55 5G (256 Go)
+  oraimo-chargeur-18w-type-c.jpg -> Chargeur rapide Oraimo 18 W + câble Type-C
+  samsung-chargeur-25w.jpg -> Chargeur Samsung 25 W USB-C original
+  apple-chargeur-20w.jpg -> Chargeur Apple 20 W USB-C
+  cable-usb-c-lightning.jpg -> Câble USB-C vers Lightning 1 m
+  oraimo-cable-type-c-renforce.jpg -> Câble Type-C renforcé Oraimo 1 m
+  ecouteurs-filaires-type-c.jpg -> Écouteurs filaires Type-C avec micro
+  oraimo-enceinte-bluetooth.jpg -> Enceinte Bluetooth Oraimo portable
+  verre-trempe.jpg -> Verre trempé (tous modèles)
+  oraimo-powerbank-20000.jpg -> Power bank Oraimo 20 000 mAh
+  oraimo-watch.jpg -> Montre connectée Oraimo Watch
+  carte-memoire-64go.jpg -> Carte mémoire microSD 64 Go
+  tecno-pop-8.jpg -> Tecno Pop 8
+  tecno-camon-30.jpg -> Tecno Camon 30
+  tecno-pova-6-pro.jpg -> Tecno Pova 6 Pro
+  tecno-phantom-x2.jpg -> Tecno Phantom X2
+  infinix-smart-9.jpg -> Infinix Smart 9
+  infinix-hot-30.jpg -> Infinix Hot 30
+  infinix-hot-50i.jpg -> Infinix Hot 50i
+  infinix-note-40.jpg -> Infinix Note 40
+  apple-iphone-11.jpg -> Apple iPhone 11
+  apple-iphone-12.jpg -> Apple iPhone 12
+  apple-iphone-15.jpg -> Apple iPhone 15
+  samsung-galaxy-a05.jpg -> Samsung Galaxy A05
+  samsung-galaxy-a25-5g.jpg -> Samsung Galaxy A25 5G
+  samsung-galaxy-a35-5g.jpg -> Samsung Galaxy A35 5G
+  samsung-galaxy-s24.jpg -> Samsung Galaxy S24
+  samsung-galaxy-z-flip-5.jpg -> Samsung Galaxy Z Flip 5
+  samsung-galaxy-tab-a9.jpg -> Samsung Galaxy Tab A9
+
+Logos des marques : images/brands/<marque>.png
+images/vitrine/ : photos décoratives de l'accueil.
+images/a-classer/ : photos reçues dont le modèle exact reste à confirmer (non publiées).
+images/_archives-electromenager/ : anciennes photos d'électroménager, conservées mais non publiées.
