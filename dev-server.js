@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* Serveur de TEST local : sert le site, les fonctions du dossier api/ et une base en mémoire.
    Usage :  node dev-server.js     puis ouvrir http://localhost:3000  (administration : /admin).
-   Mot de passe de test : motdepasse-test-123 (ou la valeur de la variable ADMIN_PASSWORD). */
-process.env.BB_LOCAL = '1'; process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'motdepasse-test-123';
+   Mot de passe : celui de l'administration (ou la valeur de la variable ADMIN_PASSWORD). */
+process.env.BB_LOCAL = '1';
 const http = require('http'), fs = require('fs'), path = require('path');
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.txt': 'text/plain; charset=utf-8' };
 const PORT = process.env.PORT || 3000;
@@ -19,4 +19,4 @@ http.createServer(async (req, res) => {
   const file = path.join(__dirname, path.normalize(p));
   if (!file.startsWith(__dirname) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.statusCode = 404; return res.end('404'); }
   res.setHeader('Content-Type', MIME[path.extname(file)] || 'application/octet-stream'); fs.createReadStream(file).pipe(res);
-}).listen(PORT, () => console.log(`Site : http://localhost:${PORT}\nAdministration : http://localhost:${PORT}/admin  (mot de passe : ${process.env.ADMIN_PASSWORD})`));
+}).listen(PORT, () => console.log(`Site : http://localhost:${PORT}\nAdministration : http://localhost:${PORT}/admin  (mot de passe : celui de l'administration)`));

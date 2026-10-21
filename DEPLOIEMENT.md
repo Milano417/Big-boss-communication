@@ -76,16 +76,12 @@ Vercel ajoute seul les variables `KV_REST_API_URL` et `KV_REST_API_TOKEN`.
 
 ---
 
-## 4. Mot de passe administrateur
+## 4. Mot de passe administrateur (rien à faire)
 
-Projet → **Settings → Environment Variables** → ajouter :
+Le mot de passe de l'administration est **déjà intégré au site** : aucune variable à ajouter.
+Le code ne contient que son empreinte chiffrée (le dépôt GitHub est public), jamais le mot de passe en clair. Ne l'écrivez donc dans aucun fichier du projet.
 
-| Nom | Valeur |
-|---|---|
-| `ADMIN_PASSWORD` | mot de passe **long** (10 caractères minimum, idéalement 16) |
-| `SESSION_SECRET` | une longue suite de caractères au hasard (recommandé) |
-
-Cocher les environnements **Production** et **Preview**.
+*Facultatif :* pour le **changer** sans toucher au code, ajoutez dans **Settings → Environment Variables** une variable `ADMIN_PASSWORD` (10 caractères minimum), puis Redeploy. Elle remplace le mot de passe intégré, et toutes les sessions ouvertes sont fermées.
 
 ---
 
@@ -122,7 +118,8 @@ Puis, première mise en route :
 | Le site s'affiche à `/un-dossier/` mais pas à `/` | Même cause | Même solution |
 | `/api/catalogue` : **NOT_FOUND** | Le dossier `api/` n'est pas à la racine | Étape 0 |
 | `/api/catalogue` : `"code":"no-db"` | Base de données non connectée | Étape 3 puis Redeploy |
-| Admin : « ADMIN_PASSWORD doit être défini » | Variable absente ou trop courte | Étape 4 puis Redeploy |
+| Admin : « ADMIN_PASSWORD est trop court » | Une variable `ADMIN_PASSWORD` de moins de 10 caractères existe | La corriger ou la supprimer, puis Redeploy |
+| Admin : « Mot de passe incorrect » alors qu'il est bon | Une variable `ADMIN_PASSWORD` remplace le mot de passe intégré, ou majuscules/minuscules | Vérifier les variables Vercel ; respecter les majuscules |
 | Admin : « Mode démonstration » | Le dossier `api/` n'a pas été envoyé | Étape 1 |
 | Photos ou mise en page absentes | Dossier `images/` ou fichier `.css` manquant, ou nom de fichier avec une majuscule différente | Renvoyer les fichiers ; les noms doivent correspondre exactement (`itel-a04.jpg` ≠ `Itel-A04.JPG`) |
 | Ancienne version encore visible | Cache du navigateur | Recharger avec Ctrl + F5 ou en navigation privée |
@@ -143,4 +140,4 @@ Avec Node.js installé, dans le dossier du projet :
 node dev-server.js
 ```
 
-Puis ouvrir <http://localhost:3000> (administration : `/admin`, mot de passe de test affiché dans le terminal).
+Puis ouvrir <http://localhost:3000> (administration : `/admin`, même mot de passe qu'en ligne).

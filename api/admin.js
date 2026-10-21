@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const b = req.body && typeof req.body === 'object' ? req.body : {}, action = String(b.action || '');
   try {
     if (action === 'login') {
-      if (L.adminPassword().length < 10) return reply(res, 503, 'config', 'ADMIN_PASSWORD doit être défini (10 caractères minimum) dans les variables d\'environnement.');
+      if (L.adminPassword() && L.adminPassword().length < 10) return reply(res, 503, 'config', 'ADMIN_PASSWORD est trop court (10 caractères minimum) : corrigez-le ou supprimez-le dans les variables d\'environnement.');
       if (await L.tooManyAttempts(req)) return reply(res, 429, 'rate', 'Trop de tentatives. Réessayez dans 15 minutes.');
       if (!L.passwordOk(b.password)) return reply(res, 401, 'bad-login', 'Mot de passe incorrect.');
       L.setSession(req, res, true); return L.send(res, 200, { ok: true });

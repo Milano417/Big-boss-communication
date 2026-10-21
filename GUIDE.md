@@ -18,16 +18,11 @@ Le **contenu** du dossier doit être envoyé, avec les sous-dossiers **`api/`** 
 Projet Vercel → onglet **Storage** → **Create Database** → choisir **Upstash (Redis)** → offre **gratuite** → **Connect to Project**.
 Vercel ajoute tout seul les variables `KV_REST_API_URL` et `KV_REST_API_TOKEN`. Vous n'avez rien à copier.
 
-### 3. Choisir le mot de passe administrateur
-Projet → **Settings → Environment Variables** → ajoutez :
-
-| Nom | Valeur |
-|---|---|
-| `ADMIN_PASSWORD` | un mot de passe **long** (10 caractères minimum, idéalement 16) |
-| `SESSION_SECRET` *(recommandé)* | une longue suite de caractères au hasard |
+### 3. Mot de passe administrateur : rien à faire
+Il est déjà intégré au site (le code ne contient que son empreinte chiffrée). *Facultatif :* une variable `ADMIN_PASSWORD` sur Vercel le remplace.
 
 ### 4. Redéployer (obligatoire)
-Onglet **Deployments** → menu **⋯** du dernier déploiement → **Redeploy**. Sans cela, les variables des étapes 2 et 3 ne sont pas prises en compte.
+Onglet **Deployments** → menu **⋯** du dernier déploiement → **Redeploy**. Sans cela, la base de données de l'étape 2 n'est pas prise en compte.
 
 ### 5. Premier démarrage
 1. Ouvrez `https://votre-site.vercel.app/admin` et connectez-vous.
@@ -57,7 +52,7 @@ Les photos sont réduites automatiquement et enregistrées en ligne. La session 
 ## Sécurité
 - Seule la connaissance du mot de passe donne accès aux modifications ; le serveur refuse toute modification sans session valide.
 - Après 8 mots de passe faux, l'adresse IP est bloquée pendant 15 minutes.
-- Changer `ADMIN_PASSWORD` (puis redéployer) ferme immédiatement toutes les sessions.
+- Définir ou changer la variable `ADMIN_PASSWORD` sur Vercel (puis redéployer) remplace le mot de passe intégré et ferme immédiatement toutes les sessions.
 - Ne partagez jamais le mot de passe par message non protégé. Ne le mettez pas dans les fichiers du site.
 
 ## Dépannage
@@ -66,14 +61,14 @@ Les photos sont réduites automatiquement et enregistrées en ligne. La session 
 |---|---|
 | « Mode démonstration » sur `/admin` | Le dossier `api/` n'a pas été envoyé : renvoyer le dossier **complet** |
 | « Base de données non connectée » | Étape 2 faite ? Puis **Redeploy** (étape 4) |
-| « ADMIN_PASSWORD doit être défini » | Étape 3 puis **Redeploy** |
+| « ADMIN_PASSWORD est trop court » | Corriger ou supprimer la variable sur Vercel, puis **Redeploy** |
 | « Importez d'abord le catalogue initial » | Onglet Sauvegarde → *Importer le catalogue initial* |
 | Des vignettes de marque à la place des photos | Normal tant que la photo du produit n'est pas ajoutée (fiche produit → Photo) |
 | Plus aucune image du site ne s'affiche | Le dossier **`images/`** n'a pas été envoyé : le renvoyer en entier |
 | « Session expirée » | Se reconnecter |
 
 ## Essayer sur son ordinateur (facultatif)
-Avec Node.js installé : `node dev-server.js`, puis ouvrir <http://localhost:3000> (administration : `/admin`, mot de passe de test affiché dans le terminal). La base est alors en mémoire et se vide à l'arrêt.
+Avec Node.js installé : `node dev-server.js`, puis ouvrir <http://localhost:3000> (administration : `/admin`, même mot de passe qu'en ligne). La base est alors en mémoire et se vide à l'arrêt.
 
 ## Fichiers
 `index.html`, `style.css`, `app.js` (site) · `admin.html`, `admin.js`, `admin.css` (administration) · `store.js` (lien avec le serveur) · `api/` (serveur : lecture publique, actions protégées, photos) · `vercel.json` (en-têtes de sécurité, adresse `/admin`) · `data.js`, `catalogue.js` (catalogue de départ) · `images/` (logos et photos).

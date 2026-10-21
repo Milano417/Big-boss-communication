@@ -45,10 +45,16 @@ function send(res, status, body) { res.statusCode = status; res.setHeader('Conte
 
 /* ---------- authentification administrateur ---------- */
 const sha = (s) => crypto.createHash('sha256').update(String(s)).digest();
+// Mot de passe intégré : seule son empreinte SHA-256 figure ici (le dépôt est public, le mot de passe n'y est jamais écrit en clair).
+// La variable ADMIN_PASSWORD, si elle est définie sur Vercel, le remplace.
+const BUILTIN_HASH = '27943793ac3fa4dda3960a1ac509504b1b93a9356419a95f3b90d6d3b6816d9e';
 const adminPassword = () => process.env.ADMIN_PASSWORD || '';
-const secret = () => process.env.SESSION_SECRET || 'bigboss|' + adminPassword();
-const passVersion = () => sha(adminPassword()).toString('hex').slice(0, 16); // un changement de mot de passe ferme toutes les sessions
-function passwordOk(input) { const a = sha(input), b = sha(adminPassword()); return adminPassword().length > 0 && crypto.timingSafeEqual(a, b); }
+const passHash = () => (adminPassword() ? sha(adminPassword()) : Buffer.from(BUILTIN_HASH, 'hex'));
+// Clé de signature des sessions : jamais déductible du code public (jeton secret de la base, sinon clé aléatoire du serveur).
+const RANDOM_SECRET = crypto.randomBytes(32).toString('hex');
+const secret = () => process.env.SESSION_SECRET || 'bigboss|' + (process.env.ADMIN_PASSWORD || DB_TOKEN() || RANDOM_SECRET) + '|' + passHash().toString('hex');
+const passVersion = () => passHash().toString('hex').slice(0, 16); // un changement de mot de passe ferme toutes les sessions
+function passwordOk(input) { return typeof input === 'string' && input.length > 0 && crypto.timingSafeEqual(sha(input), passHash()); }
 function sign(payload) { const b = Buffer.from(JSON.stringify(payload)).toString('base64url'); return b + '.' + crypto.createHmac('sha256', secret()).update(b).digest('base64url'); }
 function verify(token) {
   if (!token || typeof token !== 'string') return null; const [b, s] = token.split('.'); if (!b || !s) return null;
