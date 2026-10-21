@@ -6,10 +6,12 @@
 
 ## Les 5 étapes
 
-### 1. Envoyer le dossier sur Vercel
-Le dossier complet doit être envoyé, avec les sous-dossiers **`api/`** et **`images/`**.
+> 📘 Le guide détaillé, avec la vérification et le dépannage, est dans **DEPLOIEMENT.md**.
 
-- **Avec GitHub :** créez un dépôt, envoyez tout le contenu du dossier (*Add file → Upload files*, glissez tout). Puis sur <https://vercel.com/new> : choisissez le dépôt → **Deploy** (rien à modifier).
+### 1. Envoyer le dossier sur Vercel
+Le **contenu** du dossier doit être envoyé, avec les sous-dossiers **`api/`** et **`images/`**. `index.html` doit se trouver à la **racine** du dépôt, et non dans un sous-dossier : sinon l'accueil affiche une erreur 404.
+
+- **Avec GitHub :** créez un dépôt, envoyez tout le contenu du dossier (*Add file → Upload files*, sélectionnez les fichiers à l'intérieur du dossier). Puis sur <https://vercel.com/new> : choisissez le dépôt → **Deploy** (Root Directory vide, rien à modifier).
 - **Ou en ligne de commande :** dans le dossier, tapez `npx vercel --prod`.
 
 ### 2. Créer la base de données (1 minute)
